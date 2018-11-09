@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Catalog_Smartphone"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="500" Width="800"
         MinHeight="300" MinWidth="700">
     <Window.DataContext>
         <local:ViewModel></local:ViewModel>
@@ -13,11 +13,27 @@
 
     <Window.Resources>
         <ResourceDictionary>
-            <Style TargetType="Label">
-                <Setter Property="FontSize" Value="16"/>
+            <Style x:Key="l1" TargetType="Label">
+                <Setter Property="FontSize" Value="18"/>
                 <Setter Property="FontWeight" Value="Bold"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
-                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="FontFamily" Value="Times New Roman"/>
+            </Style>
+            <Style x:Key="l2" TargetType="Label">
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="FontFamily" Value="Times New Roman"/>
+
+            </Style>
+            <Style x:Key="tb" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontStyle" Value="Italic"/>
+                <Setter Property="TextAlignment" Value="Justify"/>
+                <Setter Property="Margin" Value="0 10 0 0"/>
+                <Setter Property="FontFamily" Value="Times New Roman"/>
+                <Setter Property="Foreground" Value="BlueViolet"/>
             </Style>
             <Style TargetType="TextBox">
                 <Setter Property="FontSize" Value="21"/>
@@ -26,6 +42,13 @@
                 <Setter Property="TextAlignment" Value="Center"/>
                 <Setter Property="Margin" Value="10"/>
                 <Setter Property="Height" Value="30"/>
+                <Setter Property="MinWidth" Value="150"/>
+                <Setter Property="MaxWidth" Value="200"/>
+                <Setter Property="MaxLength" Value="50"/>
+                <Setter Property="FontFamily" Value="Times New Roman"/>
+                <Setter Property="Background" Value="Gainsboro"/>
+                <Setter Property="BorderBrush" Value="Green"/>
+                <Setter Property="Foreground" Value="BlueViolet"/>
             </Style>
             <Style TargetType="RadioButton">
                 <Setter Property="Margin" Value="5 2"/>
@@ -36,10 +59,10 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid>
+    <Grid >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition  MinWidth="350"/>
+            <ColumnDefinition  MinWidth="200" Width="auto"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
@@ -47,7 +70,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <ListView MinWidth="300" Margin="5" SelectedIndex="0" Focusable="True"
+            <!--<ListView MinWidth="300" Margin="5" SelectedIndex="0" Focusable="True"
                   ItemsSource="{Binding Phones}" SelectedItem="{Binding SelectedPhone}" >
                 <ListView.View>
                     <GridView>
@@ -56,15 +79,57 @@
                         <GridViewColumn Header="Цена" DisplayMemberBinding="{Binding Price}"/>
                     </GridView>
                 </ListView.View>
-            </ListView>
-            <Label Height="auto" HorizontalAlignment="Left" Grid.Row="1">Сортировка</Label>
-            <WrapPanel Grid.Row="2">
+            </ListView>-->
+            <ListBox SelectedItem="{Binding SelectedPhone}" ItemsSource="{Binding Phones}" 
+                     Margin="5" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Margin" Value="5" />
+                        <Setter Property="Margin" Value="10" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0 10" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Row="1" Height="200" Width="200" Source="{Binding Image}"></Image>
+                            <Grid Grid.Column="1" VerticalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40"/>
+                                    <RowDefinition Height="40"/>
+                                    <RowDefinition Height="40"/>
+                                </Grid.RowDefinitions>
+                                <Label Style="{StaticResource l2}" Content="Производитель:"></Label>
+                                <TextBlock Style="{StaticResource tb}" Grid.Column="1" Text="{Binding Manufacturer}"></TextBlock>
+                                <Label Style="{StaticResource l2}" Grid.Row="1" Content="Модель:"></Label>
+                                <TextBlock Style="{StaticResource tb}" Grid.Row="1" Grid.Column="1" Text="{Binding Model}"></TextBlock>
+                                <Label Style="{StaticResource l2}" Grid.Row="2" Content="Цена:"></Label>
+                                <TextBlock Style="{StaticResource tb}" Grid.Row="2" Grid.Column="1" Text="{Binding Price}"></TextBlock>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Label Style="{StaticResource l1}" Height="auto" HorizontalAlignment="Left" Grid.Row="1" Margin="5">Сортировка</Label>
+            <WrapPanel Grid.Row="2" Margin="5">
                 <RadioButton Content="Производитель" Command="{Binding Sort}" CommandParameter="Manufacturer"/>
                 <RadioButton Content="Модель" Command="{Binding Sort}" CommandParameter="Model"/>
                 <RadioButton Content="Цена" Command="{Binding Sort}" CommandParameter="Price"/>
             </WrapPanel>
         </Grid>
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" HorizontalAlignment="Right">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="50"/>
@@ -74,24 +139,24 @@
                 <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto"/>
-                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Image Grid.Row="0" Grid.ColumnSpan="2" Width="100" Source="{Binding Path=SelectedPhone.Image, UpdateSourceTrigger=PropertyChanged}"></Image>
+            <Image Margin="0 5" Grid.Row="0" Grid.ColumnSpan="2" Width="100" Source="{Binding Path=SelectedPhone.Image, UpdateSourceTrigger=PropertyChanged}"></Image>
             <Button Grid.Row="1" Grid.ColumnSpan="2" Width="120" Height="20" Command="{Binding OpenFolder}">Изменить картинку</Button>
-            <Label Grid.Row="2" Grid.Column="0">Производитель:</Label>
+            <Label Style="{StaticResource l1}" Grid.Row="2" Grid.Column="0">Производитель:</Label>
             <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=SelectedPhone.Manufacturer, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-            <Label Grid.Row="3" Grid.Column="0">Модель:</Label>
+            <Label Style="{StaticResource l1}" Grid.Row="3" Grid.Column="0">Модель:</Label>
             <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=SelectedPhone.Model, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-            <Label Grid.Row="4" Grid.Column="0" >Цена:</Label>
+            <Label Style="{StaticResource l1}" Grid.Row="4" Grid.Column="0" >Цена:</Label>
             <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=SelectedPhone.Price, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             <Button Grid.Row="5" Grid.Column="0"
                     Margin="5 2" FontSize="20" Command="{Binding Add}" HorizontalAlignment="Right">
-                <Image Source="../Images/Add.ico"/>
+                <Image Source="../Images/Icons/Add.ico"/>
             </Button>
             <Button Grid.Row="5" Grid.Column="1"
                     Margin="10 2" FontSize="20" Command="{Binding Delete}" HorizontalAlignment="Left">
-                <Image Source="../Images/Delete.ico"/>
+                <Image Source="../Images/Icons/Delete.ico"/>
             </Button>
         </Grid>
     </Grid>

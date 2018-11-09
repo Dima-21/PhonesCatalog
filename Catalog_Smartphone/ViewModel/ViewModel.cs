@@ -92,7 +92,7 @@ namespace Catalog_Smartphone
             {
                 Manufacturer = "Unknown",
                 Model = "Unknown",
-                Image = "../Images/Phone.ico"
+                Image = "../Images/Phones/Phone.ico"
             });
         }
         private void ChangeImage()
