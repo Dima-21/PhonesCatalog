@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Catalog_Smartphone"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800"
+        Title="PhonesCatalog" Height="500" Width="800"
         MinHeight="300" MinWidth="700">
     <Window.DataContext>
         <local:ViewModel></local:ViewModel>
@@ -70,22 +70,12 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <!--<ListView MinWidth="300" Margin="5" SelectedIndex="0" Focusable="True"
-                  ItemsSource="{Binding Phones}" SelectedItem="{Binding SelectedPhone}" >
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Производитель" DisplayMemberBinding="{Binding Manufacturer}" />
-                        <GridViewColumn Header="Модель" DisplayMemberBinding="{Binding Model}"/>
-                        <GridViewColumn Header="Цена" DisplayMemberBinding="{Binding Price}"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>-->
             <ListBox SelectedItem="{Binding SelectedPhone}" ItemsSource="{Binding Phones}" 
                      Margin="5" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
-                        <Setter Property="Margin" Value="5" />
                         <Setter Property="Margin" Value="10" />
+                        <Setter Property="Width" Value="450" />
                     </Style>
                 </ListBox.ItemContainerStyle>
                 <ListBox.ItemsPanel>
@@ -95,16 +85,16 @@
                 </ListBox.ItemsPanel>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="0 10" >
+                        <Grid >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Row="1" Height="200" Width="200" Source="{Binding Image}"></Image>
+                            <Image Grid.Row="1" Height="200" Width="150" Source="{Binding Image}"></Image>
                             <Grid Grid.Column="1" VerticalAlignment="Center">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="200"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="40"/>
