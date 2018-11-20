@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Catalog_Smartphone"
         mc:Ignorable="d"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="PhonesCatalog" Height="500" Width="800"
         MinHeight="300" MinWidth="700">
     <Window.DataContext>
-        <local:ViewModel></local:ViewModel>
+        <local:MainViewModel></local:MainViewModel>
     </Window.DataContext>
 
     <Window.Resources>
@@ -66,18 +67,23 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="8*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="*" MinHeight="100"/>
             </Grid.RowDefinitions>
-            <ListBox SelectedItem="{Binding SelectedPhone}" ItemsSource="{Binding Phones}" 
-                     Margin="5" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="Margin" Value="10" />
-                        <Setter Property="Width" Value="450" />
-                    </Style>
-                </ListBox.ItemContainerStyle>
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="5" Width="40" Height="40" Padding="0" Command="{Binding Add}">
+                    <materialDesign:PackIcon Kind="Add" Width="25" Height="25"></materialDesign:PackIcon>
+                </Button>
+                <Button Margin="5" Width="40" Height="40" Padding="0">
+                    <materialDesign:PackIcon Kind="Delete" Width="25" Height="25"></materialDesign:PackIcon>
+                </Button>
+                <Button Margin="5" Width="40" Height="40" Padding="0" Command="{Binding Update}">
+                    <materialDesign:PackIcon Kind="Edit" Width="25" Height="25"></materialDesign:PackIcon>
+                </Button>
+            </StackPanel>
+            <ListBox Grid.Row="1" SelectedItem="{Binding SelectedPhone}" ItemsSource="{Binding Phones}" BorderBrush="{x:Null}"
+                     Margin="5" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="LightBlue">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel/>
@@ -85,39 +91,45 @@
                 </ListBox.ItemsPanel>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Image Grid.Row="1" Height="200" Width="150" Source="{Binding Image}"></Image>
-                            <Grid Grid.Column="1" VerticalAlignment="Center">
+                        <materialDesign:Card>
+                            <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="40"/>
-                                    <RowDefinition Height="40"/>
-                                    <RowDefinition Height="40"/>
-                                </Grid.RowDefinitions>
-                                <Label Style="{StaticResource l2}" Content="Производитель:"></Label>
-                                <TextBlock Style="{StaticResource tb}" Grid.Column="1" Text="{Binding Manufacturer}"></TextBlock>
-                                <Label Style="{StaticResource l2}" Grid.Row="1" Content="Модель:"></Label>
-                                <TextBlock Style="{StaticResource tb}" Grid.Row="1" Grid.Column="1" Text="{Binding Model}"></TextBlock>
-                                <Label Style="{StaticResource l2}" Grid.Row="2" Content="Цена:"></Label>
-                                <TextBlock Style="{StaticResource tb}" Grid.Row="2" Grid.Column="1" Text="{Binding Price}"></TextBlock>
+                                <Image Grid.Row="1" Height="200" Width="150" Source="{Binding Image}"></Image>
+                                <Grid Grid.Column="1" VerticalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="200"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="40"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Style="{StaticResource l2}" Content="Производитель:"></Label>
+                                    <TextBlock Style="{StaticResource tb}" Grid.Column="1" Text="{Binding Manufact}"></TextBlock>
+                                    <Label Style="{StaticResource l2}" Grid.Row="1" Content="Модель:"></Label>
+                                    <TextBlock Style="{StaticResource tb}" Grid.Row="1" Grid.Column="1" Text="{Binding Model}"></TextBlock>
+                                    <Label Style="{StaticResource l2}" Grid.Row="2" Content="Цена:"></Label>
+                                    <TextBlock Style="{StaticResource tb}" Grid.Row="2" Grid.Column="1" Text="{Binding Price}"></TextBlock>
+                                </Grid>
                             </Grid>
-                        </Grid>
+                        </materialDesign:Card>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Label Style="{StaticResource l1}" Height="auto" HorizontalAlignment="Left" Grid.Row="1" Margin="5">Сортировка</Label>
-            <WrapPanel Grid.Row="2" Margin="5">
-                <RadioButton Content="Производитель" Command="{Binding Sort}" CommandParameter="Manufacturer"/>
-                <RadioButton Content="Модель" Command="{Binding Sort}" CommandParameter="Model"/>
-                <RadioButton Content="Цена" Command="{Binding Sort}" CommandParameter="Price"/>
-            </WrapPanel>
+            <materialDesign:Card Grid.Row="2" Margin="5" Padding="10">
+                <StackPanel>
+                    <Label Style="{StaticResource l1}" Height="auto" HorizontalAlignment="Left" Margin="5">Сортировка</Label>
+                    <WrapPanel>
+                        <RadioButton Content="Производитель" Command="{Binding Sort}" CommandParameter="Manufacturer"/>
+                        <RadioButton Content="Модель" Command="{Binding Sort}" CommandParameter="Model"/>
+                        <RadioButton Content="Цена" Command="{Binding Sort}" CommandParameter="Price"/>
+                    </WrapPanel>
+                </StackPanel>
+            </materialDesign:Card>
         </Grid>
         <Grid Grid.Column="1" HorizontalAlignment="Right">
             <Grid.RowDefinitions>
@@ -125,29 +137,34 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="60"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <Image Margin="0 5" Grid.Row="0" Grid.ColumnSpan="2" Width="100" Source="{Binding Path=SelectedPhone.Image, UpdateSourceTrigger=PropertyChanged}"></Image>
-            <Button Grid.Row="1" Grid.ColumnSpan="2" Width="120" Height="20" Command="{Binding OpenFolder}">Изменить картинку</Button>
-            <Label Style="{StaticResource l1}" Grid.Row="2" Grid.Column="0">Производитель:</Label>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=SelectedPhone.Manufacturer, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-            <Label Style="{StaticResource l1}" Grid.Row="3" Grid.Column="0">Модель:</Label>
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=SelectedPhone.Model, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-            <Label Style="{StaticResource l1}" Grid.Row="4" Grid.Column="0" >Цена:</Label>
-            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=SelectedPhone.Price, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-            <Button Grid.Row="5" Grid.Column="0"
-                    Margin="5 2" FontSize="20" Command="{Binding Add}" HorizontalAlignment="Right">
-                <Image Source="../Images/Icons/Add.ico"/>
-            </Button>
-            <Button Grid.Row="5" Grid.Column="1"
-                    Margin="10 2" FontSize="20" Command="{Binding Delete}" HorizontalAlignment="Left">
-                <Image Source="../Images/Icons/Delete.ico"/>
-            </Button>
+            <materialDesign:Card Grid.Row="0" Grid.ColumnSpan="2" Margin="5">
+                <StackPanel>
+                    <Image Margin="10" Width="100" Source="{Binding Path=SelectedPhone.Image, UpdateSourceTrigger=PropertyChanged}"></Image>
+                </StackPanel>
+            </materialDesign:Card>
+            <Label Style="{StaticResource l1}" Grid.Row="1" Grid.Column="0">Производитель:</Label>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=SelectedPhone.Manufact}"></TextBox>
+            <Label Style="{StaticResource l1}" Grid.Row="2" Grid.Column="0">Модель:</Label>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=SelectedPhone.Model}"></TextBox>
+            <Label Style="{StaticResource l1}" Grid.Row="3" Grid.Column="0" >Цена:</Label>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=SelectedPhone.Price}"></TextBox>
+            <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Margin="2" FontSize="20" Command="{Binding Add}">
+                    <materialDesign:PackIcon Kind="Add" Width="20" Height="20"/>
+                </Button>
+                <Button Margin="2" FontSize="20" Command="{Binding Delete}">
+                    <materialDesign:PackIcon Kind="Delete" Width="20" Height="20"/>
+                </Button>
+                <Button Margin="2" FontSize="20" Command="{Binding Info}">
+                    <materialDesign:PackIcon Kind="Information" Width="20" Height="20"/>
+                </Button>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>
