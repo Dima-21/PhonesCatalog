@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:Catalog_Smartphone"
         mc:Ignorable="d"
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="PhonesCatalog" Height="500" Width="800" Name="mainwindow"
-        MinHeight="450" MinWidth="700" WindowStyle="None">
+        Title="PhonesCatalog" Height="500" Width="950" Name="mainwindow"
+        MinHeight="650" MinWidth="700" WindowStyle="None">
     <Window.DataContext>
         <local:MainViewModel></local:MainViewModel>
     </Window.DataContext>
@@ -29,33 +29,30 @@
 
             </Style>
             <Style x:Key="tb" TargetType="TextBlock">
-                <Setter Property="FontSize" Value="18"/>
-                <Setter Property="FontStyle" Value="Italic"/>
-                <Setter Property="TextAlignment" Value="Justify"/>
-                <Setter Property="Margin" Value="0 10 0 0"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="TextWrapping" Value="Wrap"/>
+                <Setter Property="Margin" Value="0 12"/>
                 <Setter Property="FontFamily" Value="Times New Roman"/>
-                <Setter Property="Foreground" Value="BlueViolet"/>
+                <Setter Property="Foreground" Value="DarkViolet"/>
             </Style>
-            <Style TargetType="TextBox">
-                <Setter Property="FontSize" Value="21"/>
+            <Style x:Key="tb1" TargetType="TextBlock" BasedOn="{StaticResource tb}">
+                <Setter Property="FontSize" Value="16"/>
                 <Setter Property="FontWeight" Value="Light"/>
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
-                <Setter Property="TextAlignment" Value="Center"/>
-                <Setter Property="Margin" Value="10"/>
-                <Setter Property="Height" Value="30"/>
-                <Setter Property="MinWidth" Value="150"/>
-                <Setter Property="MaxWidth" Value="200"/>
-                <Setter Property="MaxLength" Value="50"/>
-                <Setter Property="FontFamily" Value="Times New Roman"/>
-                <Setter Property="Background" Value="Gainsboro"/>
-                <Setter Property="BorderBrush" Value="Green"/>
-                <Setter Property="Foreground" Value="BlueViolet"/>
             </Style>
+ 
             <Style TargetType="RadioButton">
                 <Setter Property="Margin" Value="5 2"/>
                 <Setter Property="FontSize" Value="15"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
                 <Setter Property="FontWeight" Value="DemiBold"/>
+            </Style>
+
+            <Style x:Key="butt1" BasedOn="{StaticResource MaterialDesignFloatingActionMiniLightButton}" TargetType="Button">
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Width" Value="30"/>
+                <Setter Property="Height" Value="30"/>
+                <Setter Property="Padding" Value="0"/>
             </Style>
         </ResourceDictionary>
     </Window.Resources>
@@ -69,20 +66,26 @@
             <RowDefinition Height="50"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal">
-            <Button Margin="5" Width="40" Height="40" Padding="0" Command="{Binding Add}">
+        <StackPanel Orientation="Horizontal" Margin="10 0">
+            <Button Style="{StaticResource butt1}" Command="{Binding Add}">
                 <materialDesign:PackIcon Kind="Add" Width="25" Height="25"></materialDesign:PackIcon>
             </Button>
-            <Button Margin="5" Width="40" Height="40" Padding="0" Command="{Binding Delete}">
+            <Button Style="{StaticResource butt1}" Command="{Binding Delete}">
                 <materialDesign:PackIcon Kind="Delete" Width="25" Height="25"></materialDesign:PackIcon>
             </Button>
-            <Button Margin="5" Width="40" Height="40" Padding="0" Command="{Binding Edit}">
+            <Button Style="{StaticResource butt1}" Command="{Binding Edit}">
                 <materialDesign:PackIcon Kind="Edit" Width="25" Height="25"></materialDesign:PackIcon>
             </Button>
         </StackPanel>
-        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Margin="5" Width="40" Height="40" Padding="0" Command="{Binding Close}" CommandParameter="{Binding ElementName=mainwindow}">
-                <materialDesign:PackIcon Kind="ExitToApp" Width="25" Height="25"></materialDesign:PackIcon>
+        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10 0">
+            <Button Style="{StaticResource butt1}" Command="{Binding WMinimize}" CommandParameter="{Binding ElementName=mainwindow}">
+                <materialDesign:PackIcon Kind="WindowMinimize" Width="25" Height="25"></materialDesign:PackIcon>
+            </Button>
+            <Button Style="{StaticResource butt1}" Command="{Binding WMaximize}" CommandParameter="{Binding ElementName=mainwindow}">
+                <materialDesign:PackIcon Kind="{Binding WinState}" Width="25" Height="25"></materialDesign:PackIcon>
+            </Button>
+            <Button Style="{StaticResource butt1}" Command="{Binding Close}" CommandParameter="{Binding ElementName=mainwindow}">
+                <materialDesign:PackIcon Kind="WindowClose" Width="25" Height="25"></materialDesign:PackIcon>
             </Button>
         </StackPanel>
         <Grid Grid.Column="0" Grid.Row="1">
@@ -90,8 +93,8 @@
                 <RowDefinition />
                 <RowDefinition MinHeight="100" Height="auto"/>
             </Grid.RowDefinitions>
-            <ListBox SelectedItem="{Binding SelectedPhone}" ItemsSource="{Binding Phones}" BorderBrush="{x:Null}"
-                     Margin="5" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="LightBlue">
+            <ListBox SelectedItem="{Binding SelectedPhone}" ItemsSource="{Binding Phones}"
+                     Margin="5" Background="Gray" >
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel/>
@@ -117,11 +120,11 @@
                                         <RowDefinition Height="40"/>
                                     </Grid.RowDefinitions>
                                     <Label Style="{StaticResource l2}" Content="Производитель:"></Label>
-                                    <TextBlock Style="{StaticResource tb}" Grid.Column="1" Text="{Binding Manufact}"></TextBlock>
+                                    <TextBlock Style="{StaticResource tb1}" Grid.Column="1" Text="{Binding Manufact}"></TextBlock>
                                     <Label Style="{StaticResource l2}" Grid.Row="1" Content="Модель:"></Label>
-                                    <TextBlock Style="{StaticResource tb}" Grid.Row="1" Grid.Column="1" Text="{Binding Model}"></TextBlock>
+                                    <TextBlock Style="{StaticResource tb1}" Grid.Row="1" Grid.Column="1" Text="{Binding Model}"></TextBlock>
                                     <Label Style="{StaticResource l2}" Grid.Row="2" Content="Цена:"></Label>
-                                    <TextBlock Style="{StaticResource tb}" Grid.Row="2" Grid.Column="1" Text="{Binding Price}"></TextBlock>
+                                    <TextBlock Style="{StaticResource tb1}" Grid.Row="2" Grid.Column="1" Text="{Binding Price}"></TextBlock>
                                 </Grid>
                             </Grid>
                         </materialDesign:Card>
@@ -139,7 +142,7 @@
                 </StackPanel>
             </materialDesign:Card>
         </Grid>
-        <Grid Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right">
+        <Grid Grid.Column="1" Grid.Row="1" Margin="15" MaxWidth="265">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="50"/>
@@ -151,20 +154,19 @@
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <materialDesign:Card Grid.Row="0" Grid.ColumnSpan="2" Margin="5" MinHeight="150">
+            <materialDesign:Card Grid.Row="0" Grid.ColumnSpan="2" Margin="5" MinHeight="150" MaxWidth="250" HorizontalAlignment="Left">
                 <StackPanel>
                     <Image Margin="10" Width="200" Source="{Binding Path=SelectedPhone.Image, UpdateSourceTrigger=PropertyChanged}"></Image>
                 </StackPanel>
             </materialDesign:Card>
             <Label Style="{StaticResource l1}" Grid.Row="1" Grid.Column="0">Производитель:</Label>
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=SelectedPhone.Manufact}"></TextBox>
+            <TextBlock Style="{StaticResource tb}" Grid.Row="1" Grid.Column="1" Text="{Binding Path=SelectedPhone.Manufact}"></TextBlock>
             <Label Style="{StaticResource l1}" Grid.Row="2" Grid.Column="0">Модель:</Label>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=SelectedPhone.Model}"></TextBox>
+            <TextBlock Style="{StaticResource tb}" Grid.Row="2" Grid.Column="1" Text="{Binding Path=SelectedPhone.Model}"></TextBlock>
             <Label Style="{StaticResource l1}" Grid.Row="3" Grid.Column="0" >Цена:</Label>
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=SelectedPhone.Price}"></TextBox>
-            <Button Grid.Row="4" Padding="0" Margin="2" FontSize="20" Command="{Binding Info}" 
-                    Width="50" Height="50" HorizontalAlignment="Center">
-                <materialDesign:PackIcon Kind="Information" Width="40" Height="40"/>
+            <TextBlock Style="{StaticResource tb}" Grid.Row="3" Grid.Column="1" Text="{Binding Path=SelectedPhone.Price}"></TextBlock>
+            <Button Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource butt1}" Width="40" Height="40" Command="{Binding Info}" HorizontalAlignment="Center">
+                <materialDesign:PackIcon Kind="InformationOutline" Width="30" Height="30"/>
             </Button>
         </Grid>
     </Grid>

@@ -69,7 +69,7 @@ namespace Catalog_Smartphone.ViewModel
                   (close = new RelayCommand(x =>
                   {
                       System.Windows.Window w = x as System.Windows.Window;
-                      w.Close();
+                      CloseWindow(x);
                   }));
             }
         }

@@ -13,7 +13,7 @@ namespace Catalog_Smartphone.Infrastructure
         public void ShowInfo(Phone phone)
         {
             InfoWindow infoWindow = new InfoWindow();
-            infoWindow.DataContext = phone;
+            (infoWindow.DataContext as InfoViewModel).Phone = phone;
             infoWindow.ShowDialog();
         }
         public Phone AddWindow()

@@ -6,7 +6,11 @@
         xmlns:local="clr-namespace:Catalog_Smartphone.ViewModel"
         mc:Ignorable="d"
         Title="InfoWindow" Height="450" Width="800">
-    <Window.Resources>
+    <Window.DataContext>
+        <local:InfoViewModel></local:InfoViewModel>
+    </Window.DataContext>
+        
+        <Window.Resources>
         <ResourceDictionary>
             <Style TargetType="Label">
                 <Setter Property="Foreground" Value="SlateGray"/>
@@ -34,44 +38,45 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Image  Source="{Binding Image}" Width="100" HorizontalAlignment="Left"/>
-        <TextBox Grid.Column="1" DockPanel.Dock="Right" IsEnabled="False" FontSize="14" Width="500" Text="{Binding Descript}"></TextBox>
+        <Image  Source="{Binding Phone.Image}" Width="100" HorizontalAlignment="Left"/>
+        <TextBlock Grid.Column="1" DockPanel.Dock="Right" TextWrapping="Wrap"
+                 FontSize="14"  Text="{Binding Phone.Descript}"></TextBlock>
         <WrapPanel Grid.Row="1" Grid.ColumnSpan="2">
             <StackPanel>
                 <Label>Производитель:</Label>
-                <TextBlock Text="{Binding Manufact}"></TextBlock>
+                <TextBlock Text="{Binding Phone.Manufact}"></TextBlock>
             </StackPanel>
             <StackPanel >
                 <Label>Модель:</Label>
-                <TextBlock Text="{Binding Model}"></TextBlock>
+                <TextBlock Text="{Binding Phone.Model}"></TextBlock>
             </StackPanel >
             <StackPanel >
                 <Label>Цена:</Label>
-                <TextBlock Text="{Binding Price}"></TextBlock>
+                <TextBlock Text="{Binding Phone.Price}"></TextBlock>
             </StackPanel>
             <StackPanel >
                 <Label>Операционная система:</Label>
-                <TextBlock Text="{Binding Os}"></TextBlock>
+                <TextBlock Text="{Binding Phone.Os}"></TextBlock>
             </StackPanel>
             <StackPanel >
                 <Label>HDD (Гб):</Label>
-                <TextBlock Text="{Binding Hdd}"></TextBlock>
+                <TextBlock Text="{Binding Phone.Hdd}"></TextBlock>
             </StackPanel>
             <StackPanel >
                 <Label>RAM (Гб):</Label>
-                <TextBlock Text="{Binding Ram}"></TextBlock>
+                <TextBlock Text="{Binding Phone.Ram}"></TextBlock>
             </StackPanel>
             <StackPanel >
                 <Label>Камера (МП):</Label>
-                <TextBlock Text="{Binding Cam}"></TextBlock>
+                <TextBlock Text="{Binding Phone.Cam}"></TextBlock>
             </StackPanel>
             <StackPanel >
                 <Label>Диагональ экрана:</Label>
-                <TextBlock Text="{Binding Battery}"></TextBlock>
+                <TextBlock Text="{Binding Phone.Battery}"></TextBlock>
             </StackPanel>
             <StackPanel >
                 <Label>Емкость аккумулятора:</Label>
-                <TextBlock Text="{Binding Battery}"></TextBlock>
+                <TextBlock Text="{Binding Phone.Battery}"></TextBlock>
             </StackPanel>
         </WrapPanel>
     </Grid>

@@ -13,6 +13,8 @@ using System.IO;
 using System.Data.Entity;
 using Catalog_Smartphone.View;
 using Catalog_Smartphone.ViewModel;
+using System.Windows;
+using MaterialDesignThemes.Wpf;
 
 namespace Catalog_Smartphone
 {
@@ -54,13 +56,27 @@ namespace Catalog_Smartphone
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(s));
         }
 
+        private PackIconKind winState;
+        public PackIconKind WinState
+        {
+            get { return winState; }
+            set
+            {
+                winState = value;
+                Notify();
+            }
+        }
+
         public MainViewModel()
         {
             Db = new PhonesContext();
             Db.Phones.Load();
             Phones = Db.Phones.Local;
             WM = new WindowsManager();
+            WinState = PackIconKind.WindowMaximize;
         }
+
+
 
         #region Commands
         private RelayCommand sort;
@@ -110,6 +126,42 @@ namespace Catalog_Smartphone
                   {
                       System.Windows.Window w = x as System.Windows.Window;
                       w.Close();
+                  }));
+            }
+        }
+        private RelayCommand minimize;
+        public ICommand WMinimize
+        {
+            get
+            {
+                return minimize ??
+                  (minimize = new RelayCommand(x =>
+                  {
+                      System.Windows.Window w = x as System.Windows.Window;
+                      w.WindowState = WindowState.Minimized;
+                  }));
+            }
+        }
+        private RelayCommand maximize;
+        public ICommand WMaximize
+        {
+            get
+            {
+                return maximize ??
+                  (maximize = new RelayCommand(x =>
+                  {
+                      System.Windows.Window w = x as System.Windows.Window;
+                      if (WinState == PackIconKind.WindowMaximize)
+                      {
+                          w.WindowState = WindowState.Maximized;
+                          WinState = PackIconKind.WindowRestore;
+                      }
+                      else
+                      {
+                          w.WindowState = WindowState.Normal;
+                          WinState = PackIconKind.WindowMaximize;
+                      }
+
                   }));
             }
         }

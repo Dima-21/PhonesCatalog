@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Catalog_Smartphone.ViewModel"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        mc:Ignorable="d"
-        Title="AddWindow" Height="500" Width="800" Name="wnd">
+        mc:Ignorable="d" MinHeight="500" MinWidth="400"
+        Title="AddWindow" Width="800"  Name="wnd">
     <Window.DataContext>
         <local:AddViewModel></local:AddViewModel>
     </Window.DataContext>
@@ -27,8 +27,8 @@
                     <Button Margin="10" Width="220" Command="{Binding OpenFolder}">Изменить картинку</Button>
                 </StackPanel>
             </materialDesign:Card>
-            <TextBox FontSize="14" Margin="5"
-                TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Text="{Binding Phone.Descript}"/>
+            <TextBox FontSize="14" Margin="5" Height="230" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" Padding="2"
+                TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" materialDesign:HintAssist.Hint="Описание" Text="{Binding Phone.Descript}"/>
         </StackPanel>
         <StackPanel Grid.Column="1">
             <TextBox FontSize="18" materialDesign:HintAssist.Hint="Производитель"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
