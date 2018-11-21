@@ -148,15 +148,6 @@ namespace Catalog_Smartphone
         }
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public static ObservableCollection<Phone> GetAll()
-        {
-            return new ObservableCollection<Phone>()
-            {
-                //new Phone{ Manufacturer="iPhone", Model="5S", Price=8000, Image = "../Images/Phones/iPhone_5s.jpg"},
-                //new Phone{ Manufacturer="Samsung", Model="S8", Price=13999, Image = "../Images/Phones/Samsung_s8.png" }
-            };
-        }
-
         public object Clone()
         {
             return this.MemberwiseClone();

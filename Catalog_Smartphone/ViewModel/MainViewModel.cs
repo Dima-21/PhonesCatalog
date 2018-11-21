@@ -82,16 +82,15 @@ namespace Catalog_Smartphone
                   (delete = new RelayCommand(x => DeletePhone(), y => SelectedPhone != null));
             }
         }
-        private RelayCommand update;
-        public ICommand Update
+        private RelayCommand edit;
+        public ICommand Edit
         {
             get
             {
-                return update ??
-                  (update = new RelayCommand(x => UpdatePhone()));
+                return edit ??
+                  (edit = new RelayCommand(x => UpdatePhone(), y => SelectedPhone != null));
             }
         }
-
         private RelayCommand info;
         public ICommand Info
         {
@@ -101,7 +100,19 @@ namespace Catalog_Smartphone
                   (info = new RelayCommand(x => { WM.ShowInfo(SelectedPhone); }, y => SelectedPhone != null));
             }
         }
-
+        private RelayCommand close;
+        public ICommand Close
+        {
+            get
+            {
+                return close ??
+                  (close = new RelayCommand(x =>
+                  {
+                      System.Windows.Window w = x as System.Windows.Window;
+                      w.Close();
+                  }));
+            }
+        }
         #endregion
 
 
@@ -126,15 +137,10 @@ namespace Catalog_Smartphone
         }
         private void UpdatePhone()
         {
-            Phone sel_phone = SelectedPhone;
-            WM.EditWindow(sel_phone);
-            Phone dbphone = Db.Phones.Find(sel_phone.Id);
-            if (dbphone != null)
-            {
-                dbphone = sel_phone.Clone() as Phone;
-                Db.Entry(dbphone).State = EntityState.Modified;
-                Db.SaveChanges();
-            }
+            Phone vmPhone = (SelectedPhone.Clone()) as Phone;
+            WM.EditWindow(vmPhone);
+            Db.Update(vmPhone);
+            Db.SaveChanges();
         }
         private void ChangeImage()
         {

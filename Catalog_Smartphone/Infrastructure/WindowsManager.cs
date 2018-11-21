@@ -28,8 +28,8 @@ namespace Catalog_Smartphone.Infrastructure
         public Phone EditWindow(Phone phone)
         {
             AddWindow addWindow = new AddWindow();
-            addWindow.ShowDialog();
             (addWindow.DataContext as AddViewModel).Phone = phone;
+            addWindow.ShowDialog();       
             if (!(addWindow.DataContext as AddViewModel).IsApply)
                 return null;
 

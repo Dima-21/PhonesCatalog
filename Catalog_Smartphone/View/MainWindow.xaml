@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:Catalog_Smartphone"
         mc:Ignorable="d"
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="PhonesCatalog" Height="500" Width="800"
-        MinHeight="300" MinWidth="700">
+        Title="PhonesCatalog" Height="500" Width="800" Name="mainwindow"
+        MinHeight="450" MinWidth="700" WindowStyle="None">
     <Window.DataContext>
         <local:MainViewModel></local:MainViewModel>
     </Window.DataContext>
@@ -65,24 +65,32 @@
             <ColumnDefinition  MinWidth="350"/>
             <ColumnDefinition  MinWidth="200" Width="auto"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Button Margin="5" Width="40" Height="40" Padding="0" Command="{Binding Add}">
+                <materialDesign:PackIcon Kind="Add" Width="25" Height="25"></materialDesign:PackIcon>
+            </Button>
+            <Button Margin="5" Width="40" Height="40" Padding="0" Command="{Binding Delete}">
+                <materialDesign:PackIcon Kind="Delete" Width="25" Height="25"></materialDesign:PackIcon>
+            </Button>
+            <Button Margin="5" Width="40" Height="40" Padding="0" Command="{Binding Edit}">
+                <materialDesign:PackIcon Kind="Edit" Width="25" Height="25"></materialDesign:PackIcon>
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Margin="5" Width="40" Height="40" Padding="0" Command="{Binding Close}" CommandParameter="{Binding ElementName=mainwindow}">
+                <materialDesign:PackIcon Kind="ExitToApp" Width="25" Height="25"></materialDesign:PackIcon>
+            </Button>
+        </StackPanel>
+        <Grid Grid.Column="0" Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="5*"/>
-                <RowDefinition Height="*" MinHeight="100"/>
+                <RowDefinition />
+                <RowDefinition MinHeight="100" Height="auto"/>
             </Grid.RowDefinitions>
-            <StackPanel Orientation="Horizontal">
-                <Button Margin="5" Width="40" Height="40" Padding="0" Command="{Binding Add}">
-                    <materialDesign:PackIcon Kind="Add" Width="25" Height="25"></materialDesign:PackIcon>
-                </Button>
-                <Button Margin="5" Width="40" Height="40" Padding="0">
-                    <materialDesign:PackIcon Kind="Delete" Width="25" Height="25"></materialDesign:PackIcon>
-                </Button>
-                <Button Margin="5" Width="40" Height="40" Padding="0" Command="{Binding Update}">
-                    <materialDesign:PackIcon Kind="Edit" Width="25" Height="25"></materialDesign:PackIcon>
-                </Button>
-            </StackPanel>
-            <ListBox Grid.Row="1" SelectedItem="{Binding SelectedPhone}" ItemsSource="{Binding Phones}" BorderBrush="{x:Null}"
+            <ListBox SelectedItem="{Binding SelectedPhone}" ItemsSource="{Binding Phones}" BorderBrush="{x:Null}"
                      Margin="5" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="LightBlue">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -120,7 +128,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <materialDesign:Card Grid.Row="2" Margin="5" Padding="10">
+            <materialDesign:Card Grid.Row="1" Margin="5,5,5,0" Padding="10" >
                 <StackPanel>
                     <Label Style="{StaticResource l1}" Height="auto" HorizontalAlignment="Left" Margin="5">Сортировка</Label>
                     <WrapPanel>
@@ -131,7 +139,7 @@
                 </StackPanel>
             </materialDesign:Card>
         </Grid>
-        <Grid Grid.Column="1" HorizontalAlignment="Right">
+        <Grid Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="50"/>
@@ -143,9 +151,9 @@
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <materialDesign:Card Grid.Row="0" Grid.ColumnSpan="2" Margin="5">
+            <materialDesign:Card Grid.Row="0" Grid.ColumnSpan="2" Margin="5" MinHeight="150">
                 <StackPanel>
-                    <Image Margin="10" Width="100" Source="{Binding Path=SelectedPhone.Image, UpdateSourceTrigger=PropertyChanged}"></Image>
+                    <Image Margin="10" Width="200" Source="{Binding Path=SelectedPhone.Image, UpdateSourceTrigger=PropertyChanged}"></Image>
                 </StackPanel>
             </materialDesign:Card>
             <Label Style="{StaticResource l1}" Grid.Row="1" Grid.Column="0">Производитель:</Label>
@@ -154,17 +162,10 @@
             <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=SelectedPhone.Model}"></TextBox>
             <Label Style="{StaticResource l1}" Grid.Row="3" Grid.Column="0" >Цена:</Label>
             <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=SelectedPhone.Price}"></TextBox>
-            <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Margin="2" FontSize="20" Command="{Binding Add}">
-                    <materialDesign:PackIcon Kind="Add" Width="20" Height="20"/>
-                </Button>
-                <Button Margin="2" FontSize="20" Command="{Binding Delete}">
-                    <materialDesign:PackIcon Kind="Delete" Width="20" Height="20"/>
-                </Button>
-                <Button Margin="2" FontSize="20" Command="{Binding Info}">
-                    <materialDesign:PackIcon Kind="Information" Width="20" Height="20"/>
-                </Button>
-            </StackPanel>
+            <Button Grid.Row="4" Padding="0" Margin="2" FontSize="20" Command="{Binding Info}" 
+                    Width="50" Height="50" HorizontalAlignment="Center">
+                <materialDesign:PackIcon Kind="Information" Width="40" Height="40"/>
+            </Button>
         </Grid>
     </Grid>
 </Window>
