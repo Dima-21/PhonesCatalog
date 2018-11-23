@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Catalog_Smartphone.ViewModel"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        mc:Ignorable="d" MinHeight="500" MinWidth="400"
-        Title="AddWindow" Width="800"  Name="wnd">
+        mc:Ignorable="d" MinHeight="500" MinWidth="400" WindowStartupLocation="CenterScreen"
+        Title="AddWindow" Width="800"  Name="wnd" Style ="{DynamicResource WindowStyle}">
     <Window.DataContext>
         <local:AddViewModel></local:AddViewModel>
     </Window.DataContext>
@@ -32,9 +32,24 @@
         </StackPanel>
         <StackPanel Grid.Column="1">
             <TextBox FontSize="18" materialDesign:HintAssist.Hint="Производитель"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     Text="{Binding Path=Phone.Manufact, UpdateSourceTrigger=PropertyChanged}" Margin="10 2"></TextBox>
-            <TextBox FontSize="18" materialDesign:HintAssist.Hint="Модель" Margin="10 2"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     Text="{Binding Path=Phone.Model, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                      Margin="10 2">
+                <TextBox.Text>
+                    <Binding Path="Phone.Manufact">
+                        <Binding.ValidationRules>
+                            <DataErrorValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox FontSize="18" materialDesign:HintAssist.Hint="Модель" Margin="10 2"  Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                <TextBox.Text>
+                    <Binding Path="Phone.Model">
+                        <Binding.ValidationRules>
+                            <DataErrorValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
             <TextBox FontSize="18" materialDesign:HintAssist.Hint="Цена"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      Text="{Binding Path=Phone.Price, UpdateSourceTrigger=PropertyChanged}" Margin="10"></TextBox>
             <TextBox FontSize="18" materialDesign:HintAssist.Hint="Операционная система"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"

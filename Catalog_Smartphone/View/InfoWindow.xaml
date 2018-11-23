@@ -4,31 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Catalog_Smartphone.ViewModel"
-        mc:Ignorable="d"
-        Title="InfoWindow" Height="450" Width="800">
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Title="InfoWindow" Height="450" Width="800" Style ="{DynamicResource WindowStyle}" >
     <Window.DataContext>
         <local:InfoViewModel></local:InfoViewModel>
     </Window.DataContext>
-        
-        <Window.Resources>
-        <ResourceDictionary>
-            <Style TargetType="Label">
-                <Setter Property="Foreground" Value="SlateGray"/>
-                <Setter Property="FontSize" Value="18"/>
-                <Setter Property="FontWeight" Value="Heavy"/>
-                <Setter Property="FontFamily" Value="Trebuchet MS"/>
-            </Style>
-            <Style TargetType="TextBlock">
-                <Setter Property="FontSize" Value="18"/>
-                <Setter Property="Margin" Value="7 0 0 5"/>
-                <Setter Property="Padding" Value="4"/>
-            </Style>
-            <Style TargetType="StackPanel">
-                <Setter Property="Margin" Value="20 5"/>
-                <Setter Property="Orientation" Value="Horizontal"/>
-            </Style>
-        </ResourceDictionary>
-    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -38,45 +19,45 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Image  Source="{Binding Phone.Image}" Width="100" HorizontalAlignment="Left"/>
-        <TextBlock Grid.Column="1" DockPanel.Dock="Right" TextWrapping="Wrap"
+        <Image  Source="{Binding Phone.Image}" Width="100" HorizontalAlignment="Left" Margin="15"/>
+        <TextBlock Style="{StaticResource tb2}" Grid.Column="1" DockPanel.Dock="Right" Margin="0 15" TextWrapping="Wrap"
                  FontSize="14"  Text="{Binding Phone.Descript}"></TextBlock>
         <WrapPanel Grid.Row="1" Grid.ColumnSpan="2">
-            <StackPanel>
+            <StackPanel Style="{StaticResource sp}">
                 <Label>Производитель:</Label>
-                <TextBlock Text="{Binding Phone.Manufact}"></TextBlock>
+                <TextBlock Style="{StaticResource tb2}" Text="{Binding Phone.Manufact}"></TextBlock>
             </StackPanel>
-            <StackPanel >
+            <StackPanel Style="{StaticResource sp}">
                 <Label>Модель:</Label>
-                <TextBlock Text="{Binding Phone.Model}"></TextBlock>
+                <TextBlock Style="{StaticResource tb2}" Text="{Binding Phone.Model}"></TextBlock>
             </StackPanel >
-            <StackPanel >
+            <StackPanel Style="{StaticResource sp}">
                 <Label>Цена:</Label>
-                <TextBlock Text="{Binding Phone.Price}"></TextBlock>
+                <TextBlock Style="{StaticResource tb2}" Text="{Binding Phone.Price}"></TextBlock>
             </StackPanel>
-            <StackPanel >
+            <StackPanel Style="{StaticResource sp}">
                 <Label>Операционная система:</Label>
-                <TextBlock Text="{Binding Phone.Os}"></TextBlock>
+                <TextBlock Style="{StaticResource tb2}" Text="{Binding Phone.Os}"></TextBlock>
             </StackPanel>
-            <StackPanel >
+            <StackPanel Style="{StaticResource sp}">
                 <Label>HDD (Гб):</Label>
-                <TextBlock Text="{Binding Phone.Hdd}"></TextBlock>
+                <TextBlock Style="{StaticResource tb2}" Text="{Binding Phone.Hdd}"></TextBlock>
             </StackPanel>
-            <StackPanel >
+            <StackPanel Style="{StaticResource sp}">
                 <Label>RAM (Гб):</Label>
-                <TextBlock Text="{Binding Phone.Ram}"></TextBlock>
+                <TextBlock Style="{StaticResource tb2}" Text="{Binding Phone.Ram}"></TextBlock>
             </StackPanel>
-            <StackPanel >
+            <StackPanel Style="{StaticResource sp}">
                 <Label>Камера (МП):</Label>
-                <TextBlock Text="{Binding Phone.Cam}"></TextBlock>
+                <TextBlock Style="{StaticResource tb2}" Text="{Binding Phone.Cam}"></TextBlock>
             </StackPanel>
-            <StackPanel >
+            <StackPanel Style="{StaticResource sp}">
                 <Label>Диагональ экрана:</Label>
-                <TextBlock Text="{Binding Phone.Battery}"></TextBlock>
+                <TextBlock Style="{StaticResource tb2}" Text="{Binding Phone.Battery}"></TextBlock>
             </StackPanel>
-            <StackPanel >
+            <StackPanel Style="{StaticResource sp}">
                 <Label>Емкость аккумулятора:</Label>
-                <TextBlock Text="{Binding Phone.Battery}"></TextBlock>
+                <TextBlock Style="{StaticResource tb2}" Text="{Binding Phone.Battery}"></TextBlock>
             </StackPanel>
         </WrapPanel>
     </Grid>

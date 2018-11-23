@@ -15,6 +15,7 @@ using Catalog_Smartphone.View;
 using Catalog_Smartphone.ViewModel;
 using System.Windows;
 using MaterialDesignThemes.Wpf;
+using System;
 
 namespace Catalog_Smartphone
 {
@@ -50,6 +51,29 @@ namespace Catalog_Smartphone
             }
         }
 
+        private List<string> listStyles;
+        public List<string> ListStyles
+        {
+            get { return listStyles; }
+            set { listStyles = value; }
+        }
+
+        private string style;
+        public string SelectedStyle
+        {
+            get { return style; }
+            set
+            {
+                style = value;
+                var uri = new Uri("ResourceDictionary\\" + value + ".xaml", UriKind.Relative);
+                ResourceDictionary resourceDict = System.Windows.Application.LoadComponent(uri) as ResourceDictionary;
+                System.Windows.Application.Current.Resources.Clear();
+                System.Windows.Application.Current.Resources.MergedDictionaries.Add(resourceDict);
+                Notify();
+            }
+        }
+
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void Notify([CallerMemberName]string s = "")
         {
@@ -74,6 +98,9 @@ namespace Catalog_Smartphone
             Phones = Db.Phones.Local;
             WM = new WindowsManager();
             WinState = PackIconKind.WindowMaximize;
+            ListStyles = new List<string>();
+            ListStyles.Add("Dark");
+            ListStyles.Add("Light");
         }
 
 
@@ -190,9 +217,13 @@ namespace Catalog_Smartphone
         private void UpdatePhone()
         {
             Phone vmPhone = (SelectedPhone.Clone()) as Phone;
-            WM.EditWindow(vmPhone);
-            Db.Update(vmPhone);
-            Db.SaveChanges();
+            vmPhone = WM.EditWindow(vmPhone);
+            if (vmPhone != null)
+            {
+                Db.Update(vmPhone);
+                Db.SaveChanges();
+            }
+
         }
         private void ChangeImage()
         {

@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 
 namespace Catalog_Smartphone
 {
-    public class Phone : INotifyPropertyChanged, ICloneable
+    public class Phone : INotifyPropertyChanged, ICloneable, IDataErrorInfo 
     {
 
         private int id;
@@ -142,6 +142,27 @@ namespace Catalog_Smartphone
                 Notify();
             }
         }
+
+        #region Methods
+        public string Error => throw new NotImplementedException();
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string error = String.Empty;
+                switch (columnName)
+                {
+                    case "Model":
+                        if (Model.Count() < 1)
+                            error = "Введите значение";
+                        break;
+
+                }
+                return error;
+            }
+        }
+
         private void Notify([CallerMemberName] string prop = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
@@ -152,5 +173,6 @@ namespace Catalog_Smartphone
         {
             return this.MemberwiseClone();
         }
+        #endregion
     }
 }
