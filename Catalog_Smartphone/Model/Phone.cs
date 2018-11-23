@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 
 namespace Catalog_Smartphone
 {
-    public class Phone : INotifyPropertyChanged, ICloneable, IDataErrorInfo 
+    public class Phone : INotifyPropertyChanged, ICloneable, IDataErrorInfo
     {
 
         private int id;
@@ -90,13 +90,13 @@ namespace Catalog_Smartphone
             }
         }
 
-        private int hdd;
-        public int Hdd
+        private int memory;
+        public int Memory
         {
-            get { return hdd; }
+            get { return memory; }
             set
             {
-                hdd = value;
+                memory = value;
                 Notify();
             }
         }
@@ -144,7 +144,10 @@ namespace Catalog_Smartphone
         }
 
         #region Methods
-        public string Error => throw new NotImplementedException();
+        public string Error
+        {
+            get { throw new NotImplementedException(); }
+        }
 
         public string this[string columnName]
         {
@@ -154,8 +157,72 @@ namespace Catalog_Smartphone
                 switch (columnName)
                 {
                     case "Model":
-                        if (Model.Count() < 1)
+                        if (Model == null)
                             error = "Введите значение";
+                        else if (Model.Count() < 1)
+                            error = "Введите значение";
+                        else if (Model.Count() > 70)
+                            error = "Максимальное количество символов = 70";
+                        break;
+                    case "Manufact":
+                        if (Manufact == null)
+                            error = "Введите значение";
+                        else if (Manufact.Count() < 1)
+                            error = "Введите значение";
+                        else if (Manufact.Count() > 70)
+                            error = "Максимальное количество символов = 70";
+                        break;
+                    case "Price":
+                        if (Price >= 0)
+                            error = "Минимальная цена = 0";
+                        else if (Price > 1000000)
+                            error = "Максимальная цена = 1000000";
+                        break;
+                    case "Os":
+                        if (Os == null)
+                            error = "Минимальное количество символов = 3";
+                        else if (Os.Count() < 3)
+                            error = "Минимальное количество символов = 3";
+                        else if (Os.Count() > 40)
+                            error = "Максимальное количество символов = 40";
+                        break;
+                    case "Memory":
+                        if (Memory < 1)
+                            error = "Значение должно быть > 0";
+                        else if (Memory > 512)
+                            error = "Значение должно быть < 512";
+                        break;
+                    case "Ram":
+                        if (Ram < 1)
+                            error = "Значение должно быть > 0";
+                        else if (Ram > 16)
+                            error = "Значение должно быть < 16";
+                        break;
+                    case "Screen":
+                        if (Screen < 1)
+                            error = "Минимальное значение = 1";
+                        else if (Screen > 10)
+                            error = "Максимальное значение = 10";
+                        break;
+                    case "Cam":
+                        if (Cam < 1)
+                            error = "Минимальное значение = 1";
+                        else if (Cam > 30)
+                            error = "Максимальное значение = 30";
+                        break;
+                    case "Battery":
+                        if (Battery < 1)
+                            error = "Минимальное значение = 1";
+                        else if (Battery > 30)
+                            error = "Максимальное значение = 30";
+                        break;
+                    case "Descript":
+                        if (Descript == null)
+                            error = "Введите значение";
+                        else if (Descript.Count() < 1)
+                            error = "Введите значение";
+                        else if (Descript.Count() > 1000)
+                            error = "Максимальное количество символов = 1000";
                         break;
 
                 }

@@ -23,7 +23,7 @@ namespace Catalog_Smartphone.DAL
                 dbPhone.Price = p.Price;
                 dbPhone.Os = p.Os;
                 dbPhone.Ram = p.Ram;
-                dbPhone.Hdd = p.Hdd;
+                dbPhone.Memory = p.Memory;
                 dbPhone.Screen = p.Screen;
                 dbPhone.Image = p.Image;
                 dbPhone.Descript = p.Descript;
