@@ -24,7 +24,7 @@ namespace Catalog_Smartphone
             }
         }
 
-        private string model;
+        private string model = "Unknown";
         public string Model
         {
             get { return model; }
@@ -35,7 +35,7 @@ namespace Catalog_Smartphone
             }
         }
 
-        private string manuf;
+        private string manuf = "Unknown";
         public string Manufact
         {
             get { return manuf; }
@@ -46,7 +46,7 @@ namespace Catalog_Smartphone
             }
         }
 
-        private double price;
+        private double price = 0;
         public double Price
         {
             get { return price; }
@@ -57,7 +57,7 @@ namespace Catalog_Smartphone
             }
         }
 
-        private string os;
+        private string os = "Unknown";
         public string Os
         {
             get { return os; }
@@ -68,7 +68,7 @@ namespace Catalog_Smartphone
             }
         }
 
-        private double screen;
+        private double screen = 0;
         public double Screen
         {
             get { return screen; }
@@ -79,7 +79,7 @@ namespace Catalog_Smartphone
             }
         }
 
-        private int ram;
+        private int ram = 0;
         public int Ram
         {
             get { return ram; }
@@ -90,7 +90,7 @@ namespace Catalog_Smartphone
             }
         }
 
-        private int memory;
+        private int memory = 0;
         public int Memory
         {
             get { return memory; }
@@ -101,7 +101,7 @@ namespace Catalog_Smartphone
             }
         }
 
-        private int battery;
+        private int battery = 0;
         public int Battery
         {
             get { return battery; }
@@ -112,7 +112,7 @@ namespace Catalog_Smartphone
             }
         }
 
-        private string image;
+        private string image =  "..\\Images\\Phones\\Phone.ico";
         public string Image
         {
             get { return image; }
@@ -122,7 +122,7 @@ namespace Catalog_Smartphone
                 Notify();
             }
         }
-        private int cam;
+        private int cam = 0;
         public int Cam
         {
             get { return cam; }
@@ -132,7 +132,7 @@ namespace Catalog_Smartphone
                 Notify();
             }
         }
-        private string description;
+        private string description = "-";
         public string Descript
         {
             get { return description; }
@@ -142,13 +142,10 @@ namespace Catalog_Smartphone
                 Notify();
             }
         }
-
-        #region Methods
         public string Error
         {
             get { throw new NotImplementedException(); }
         }
-
         public string this[string columnName]
         {
             get
@@ -173,7 +170,7 @@ namespace Catalog_Smartphone
                             error = "Максимальное количество символов = 70";
                         break;
                     case "Price":
-                        if (Price >= 0)
+                        if (Price < 0)
                             error = "Минимальная цена = 0";
                         else if (Price > 1000000)
                             error = "Максимальная цена = 1000000";
@@ -187,34 +184,34 @@ namespace Catalog_Smartphone
                             error = "Максимальное количество символов = 40";
                         break;
                     case "Memory":
-                        if (Memory < 1)
-                            error = "Значение должно быть > 0";
+                        if (Memory < 0)
+                            error = "Минимальное значение = 0";
                         else if (Memory > 512)
                             error = "Значение должно быть < 512";
                         break;
                     case "Ram":
-                        if (Ram < 1)
-                            error = "Значение должно быть > 0";
+                        if (Ram < 0)
+                            error = "Минимальное значение = 0";
                         else if (Ram > 16)
                             error = "Значение должно быть < 16";
                         break;
                     case "Screen":
-                        if (Screen < 1)
-                            error = "Минимальное значение = 1";
+                        if (Screen < 0)
+                            error = "Минимальное значение = 0";
                         else if (Screen > 10)
                             error = "Максимальное значение = 10";
                         break;
                     case "Cam":
-                        if (Cam < 1)
-                            error = "Минимальное значение = 1";
+                        if (Cam < 0)
+                            error = "Минимальное значение = 0";
                         else if (Cam > 30)
                             error = "Максимальное значение = 30";
                         break;
                     case "Battery":
-                        if (Battery < 1)
-                            error = "Минимальное значение = 1";
-                        else if (Battery > 30)
-                            error = "Максимальное значение = 30";
+                        if (Battery < 0)
+                            error = "Минимальное значение = 0";
+                        else if (Battery > 10000)
+                            error = "Максимальное значение = 10000";
                         break;
                     case "Descript":
                         if (Descript == null)
@@ -229,6 +226,9 @@ namespace Catalog_Smartphone
                 return error;
             }
         }
+
+        #region Methods
+
 
         private void Notify([CallerMemberName] string prop = "")
         {

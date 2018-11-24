@@ -157,13 +157,13 @@
     <Resource Include="Images\Phones\Phone.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Phones\iPhone_5s.jpg" />
-    <Resource Include="Images\Phones\Samsung_s8.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="DBPhones.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\Phones\iPhoneXsMax.jpg" />
+    <Resource Include="Images\Phones\MeizuM6s.jpg" />
+    <Resource Include="Images\Phones\SamsungS9.jpg" />
+    <Resource Include="Images\Phones\SamsungA7.jpg" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

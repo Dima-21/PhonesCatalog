@@ -33,7 +33,7 @@ namespace Catalog_Smartphone.ViewModel
         public AddViewModel()
         {
             IsApply = false;
-            Phone = new Phone() { Image = "..\\Images\\Phones\\Phone.ico" };
+            Phone = new Phone();
         }
 
         private RelayCommand openFolder;
