@@ -16,6 +16,7 @@ using Catalog_Smartphone.ViewModel;
 using System.Windows;
 using MaterialDesignThemes.Wpf;
 using System;
+using Application = System.Windows.Application;
 
 namespace Catalog_Smartphone
 {
@@ -66,9 +67,9 @@ namespace Catalog_Smartphone
             {
                 style = value;
                 var uri = new Uri("ResourceDictionary\\" + value + ".xaml", UriKind.Relative);
-                ResourceDictionary resourceDict = System.Windows.Application.LoadComponent(uri) as ResourceDictionary;
-                System.Windows.Application.Current.Resources.Clear();
-                System.Windows.Application.Current.Resources.MergedDictionaries.Add(resourceDict);
+                ResourceDictionary resourceDict = Application.LoadComponent(uri) as ResourceDictionary;
+                Application.Current.Resources.Clear();
+                Application.Current.Resources.MergedDictionaries.Add(resourceDict);
                 Notify();
             }
         }
