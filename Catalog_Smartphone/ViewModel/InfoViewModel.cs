@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Catalog_Smartphone.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,19 +8,12 @@ using System.Threading.Tasks;
 
 namespace Catalog_Smartphone.ViewModel
 {
-    public class InfoViewModel : INotifyPropertyChanged
+    public class InfoViewModel
     {
-        private Phone phone;
-        public Phone Phone
+        public Phone Phone{ get; set; }
+        public InfoViewModel()
         {
-            get { return phone; }
-            set
-            {
-                phone = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Phone"));
-            }
+            Phone = PhoneMediator.Phone;
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

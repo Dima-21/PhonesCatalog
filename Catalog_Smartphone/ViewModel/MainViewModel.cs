@@ -17,6 +17,7 @@ using System.Windows;
 using MaterialDesignThemes.Wpf;
 using System;
 using Application = System.Windows.Application;
+using System.Globalization;
 
 namespace Catalog_Smartphone
 {
@@ -52,13 +53,33 @@ namespace Catalog_Smartphone
             }
         }
 
-        private List<string> listStyles;
-        public List<string> ListStyles
+        public List<string> Languages { get; set; }
+        private string selectedLanguage;
+        public string SelectedLanguage
         {
-            get { return listStyles; }
-            set { listStyles = value; }
+            get { return selectedLanguage; }
+            set
+            {
+                selectedLanguage = value;
+                switch(value)
+                {
+                    case "English":
+                        App.Language = new CultureInfo("en-US");
+                        break;
+                    case "Українська":
+                        App.Language = new CultureInfo("ua-UA");
+                        break;
+                    default:
+                        App.Language = new CultureInfo("ru-RU");
+                        break;
+                }
+                
+                Notify();
+            }
         }
 
+
+        public List<string> ListStyles { get; set; }
         private string style;
         public string SelectedStyle
         {
@@ -66,7 +87,7 @@ namespace Catalog_Smartphone
             set
             {
                 style = value;
-                var uri = new Uri("ResourceDictionary\\" + value + ".xaml", UriKind.Relative);
+                var uri = new Uri("ResourceDictionary\\Styles\\" + value + ".xaml", UriKind.Relative);
                 ResourceDictionary resourceDict = Application.LoadComponent(uri) as ResourceDictionary;
                 Application.Current.Resources.Clear();
                 Application.Current.Resources.MergedDictionaries.Add(resourceDict);
@@ -102,9 +123,13 @@ namespace Catalog_Smartphone
             ListStyles = new List<string>();
             ListStyles.Add("Dark");
             ListStyles.Add("Light");
+            SelectedStyle = ListStyles[0];
+            Languages = new List<string>();
+            Languages.Add("Русский");
+            Languages.Add("English");    
+            Languages.Add("Українська");
+            SelectedLanguage = Languages[0];
         }
-
-
 
         #region Commands
         private RelayCommand sort;
@@ -141,7 +166,12 @@ namespace Catalog_Smartphone
             get
             {
                 return info ??
-                  (info = new RelayCommand(x => { WM.ShowInfo(SelectedPhone); }, y => SelectedPhone != null));
+                  (info = new RelayCommand(x =>
+                  {
+                      PhoneMediator.Phone = (SelectedPhone.Clone()) as Phone;
+                      WM.ShowInfo();
+                      PhoneMediator.Phone = null;
+                  }, y => SelectedPhone != null));
             }
         }
         private RelayCommand close;
@@ -195,7 +225,6 @@ namespace Catalog_Smartphone
         }
         #endregion
 
-
         #region Methods
         private void DeletePhone()
         {
@@ -207,24 +236,24 @@ namespace Catalog_Smartphone
         }
         private void AddPhone()
         {
-            Phone phone = WM.AddWindow();
-            if (phone != null)
+            WM.AddWindow();
+            if (PhoneMediator.IsApply)
             {
-                Db.Phones.Add(phone);
+                Db.Phones.Add(PhoneMediator.Phone);
                 Db.SaveChanges();
             }
 
         }
         private void UpdatePhone()
         {
-            Phone vmPhone = (SelectedPhone.Clone()) as Phone;
-            vmPhone = WM.EditWindow(vmPhone);
-            if (vmPhone != null)
+            PhoneMediator.Phone = (SelectedPhone.Clone()) as Phone;
+            WM.EditWindow();
+            if (PhoneMediator.IsApply)
             {
-                Db.Update(vmPhone);
+                Db.Update(PhoneMediator.Phone);
                 Db.SaveChanges();
             }
-
+            PhoneMediator.Phone = null;
         }
         private void ChangeImage()
         {

@@ -27,13 +27,11 @@ namespace Catalog_Smartphone.ViewModel
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-    
-        
-        public bool IsApply { get; set; }
+
         public AddViewModel()
         {
-            IsApply = false;
-            Phone = new Phone();
+            PhoneMediator.IsApply = false;
+            Phone = PhoneMediator.Phone ?? new Phone();
         }
 
         private RelayCommand openFolder;
@@ -54,7 +52,7 @@ namespace Catalog_Smartphone.ViewModel
                 return apply ??
                   (apply = new RelayCommand(x =>
                   {
-                      IsApply = true;
+                      PhoneMediator.IsApply = true;
                       CloseWindow(x);
                   }));
             }
@@ -68,7 +66,7 @@ namespace Catalog_Smartphone.ViewModel
                 return close ??
                   (close = new RelayCommand(x =>
                   {
-                      System.Windows.Window w = x as System.Windows.Window;
+                      PhoneMediator.Phone = null;
                       CloseWindow(x);
                   }));
             }

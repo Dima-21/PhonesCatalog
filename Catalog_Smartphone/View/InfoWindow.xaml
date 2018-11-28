@@ -24,39 +24,39 @@
                  FontSize="14"  Text="{Binding Phone.Descript}"></TextBlock>
         <WrapPanel Grid.Row="1" Grid.ColumnSpan="2">
             <StackPanel Style="{StaticResource sp}">
-                <Label>Производитель:</Label>
+                <Label Content="{DynamicResource _manufact}"></Label>
                 <TextBlock Style="{StaticResource tb2}" Text="{Binding Phone.Manufact}"></TextBlock>
             </StackPanel>
             <StackPanel Style="{StaticResource sp}">
-                <Label>Модель:</Label>
+                <Label Content="{DynamicResource _model}"/>
                 <TextBlock Style="{StaticResource tb2}" Text="{Binding Phone.Model}"></TextBlock>
             </StackPanel >
             <StackPanel Style="{StaticResource sp}">
-                <Label>Цена:</Label>
+                <Label Content="{DynamicResource _price}"/>
                 <TextBlock Style="{StaticResource tb2}" Text="{Binding Phone.Price}"></TextBlock>
             </StackPanel>
             <StackPanel Style="{StaticResource sp}">
-                <Label>Операционная система:</Label>
+                <Label Content="{DynamicResource _os}"/>
                 <TextBlock Style="{StaticResource tb2}" Text="{Binding Phone.Os}"></TextBlock>
             </StackPanel>
             <StackPanel Style="{StaticResource sp}">
-                <Label>HDD (Гб):</Label>
-                <TextBlock Style="{StaticResource tb2}" Text="{Binding Phone.Hdd}"></TextBlock>
+                <Label Content="{DynamicResource _memory}"/>
+                <TextBlock Style="{StaticResource tb2}" Text="{Binding Phone.Memory}"></TextBlock>
             </StackPanel>
             <StackPanel Style="{StaticResource sp}">
-                <Label>RAM (Гб):</Label>
+                <Label Content="{DynamicResource _ram}"/>
                 <TextBlock Style="{StaticResource tb2}" Text="{Binding Phone.Ram}"></TextBlock>
             </StackPanel>
             <StackPanel Style="{StaticResource sp}">
-                <Label>Камера (МП):</Label>
+                <Label Content="{DynamicResource _cam}"/>
                 <TextBlock Style="{StaticResource tb2}" Text="{Binding Phone.Cam}"></TextBlock>
             </StackPanel>
             <StackPanel Style="{StaticResource sp}">
-                <Label>Диагональ экрана:</Label>
-                <TextBlock Style="{StaticResource tb2}" Text="{Binding Phone.Battery}"></TextBlock>
+                <Label Content="{DynamicResource _diagonal}"/>
+                <TextBlock Style="{StaticResource tb2}" Text="{Binding Phone.Screen}"></TextBlock>
             </StackPanel>
             <StackPanel Style="{StaticResource sp}">
-                <Label>Емкость аккумулятора:</Label>
+                <Label Content="{DynamicResource _battery}"/>
                 <TextBlock Style="{StaticResource tb2}" Text="{Binding Phone.Battery}"></TextBlock>
             </StackPanel>
         </WrapPanel>

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="PhonesCatalog" Height="500" Width="950" Name="mainwindow" WindowStartupLocation="CenterScreen"
-        MinHeight="650" MinWidth="700" WindowStyle="None" Style="{DynamicResource WindowStyle}">
+        MinHeight="650" MinWidth="700" WindowStyle="None" Style="{DynamicResource WindowStyle}" ResizeMode="NoResize">
     <Window.DataContext>
         <local:MainViewModel></local:MainViewModel>
     </Window.DataContext>
@@ -31,7 +31,10 @@
             <Button Style="{StaticResource butt1}" Command="{Binding Edit}">
                 <materialDesign:PackIcon Kind="Edit" Width="25" Height="25"></materialDesign:PackIcon>
             </Button>
-            <ComboBox Margin="40 0" ItemsSource="{Binding ListStyles}" SelectedItem="{Binding SelectedStyle}" SelectedIndex="0"></ComboBox>
+            <ComboBox Margin="40 0" ItemsSource="{Binding ListStyles}" 
+                      SelectedItem="{Binding SelectedStyle}" materialDesign:ColorZoneAssist.Mode="PrimaryDark"></ComboBox>
+            <ComboBox ItemsSource="{Binding Languages}" 
+                      SelectedItem="{Binding SelectedLanguage}" materialDesign:HintAssist.Hint="{DynamicResource _language}"></ComboBox>
         </StackPanel>
         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10 0">
             <Button Style="{StaticResource butt1}" Command="{Binding WMinimize}" CommandParameter="{Binding ElementName=mainwindow}">
@@ -51,7 +54,6 @@
             </Grid.RowDefinitions>
             <ListBox SelectedItem="{Binding SelectedPhone}" ItemsSource="{Binding Phones}"
                      Margin="5"  >
-                
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel/>
@@ -76,11 +78,11 @@
                                         <RowDefinition Height="40"/>
                                         <RowDefinition Height="40"/>
                                     </Grid.RowDefinitions>
-                                    <Label Style="{StaticResource l2}" Content="Производитель:"></Label>
+                                    <Label Style="{StaticResource l2}" Content="{DynamicResource _manufact}"></Label>
                                     <TextBlock Style="{StaticResource tb1}" Grid.Column="1" Text="{Binding Manufact}"></TextBlock>
-                                    <Label Style="{StaticResource l2}" Grid.Row="1" Content="Модель:"></Label>
+                                    <Label Style="{StaticResource l2}" Grid.Row="1" Content="{DynamicResource _model}"></Label>
                                     <TextBlock Style="{StaticResource tb1}" Grid.Row="1" Grid.Column="1" Text="{Binding Model}"></TextBlock>
-                                    <Label Style="{StaticResource l2}" Grid.Row="2" Content="Цена:"></Label>
+                                    <Label Style="{StaticResource l2}" Grid.Row="2" Content="{DynamicResource _price}"></Label>
                                     <TextBlock Style="{StaticResource tb1}" Grid.Row="2" Grid.Column="1" Text="{Binding Price}"></TextBlock>
                                 </Grid>
                             </Grid>
@@ -90,11 +92,11 @@
             </ListBox>
             <materialDesign:Card Grid.Row="1" Margin="5,5,5,0" Padding="10" >
                 <StackPanel>
-                    <Label Style="{StaticResource l1}" Height="auto" HorizontalAlignment="Left" Margin="5">Сортировка</Label>
+                    <Label Style="{StaticResource l1}" Height="auto" HorizontalAlignment="Left" Margin="5" Content="{DynamicResource _sort}"/>
                     <WrapPanel>
-                        <RadioButton Content="Производитель" Command="{Binding Sort}" CommandParameter="Manufacturer"/>
-                        <RadioButton Content="Модель" Command="{Binding Sort}" CommandParameter="Model"/>
-                        <RadioButton Content="Цена" Command="{Binding Sort}" CommandParameter="Price"/>
+                        <RadioButton Content="{DynamicResource _manufact}" Command="{Binding Sort}" CommandParameter="Manufacturer"/>
+                        <RadioButton Content="{DynamicResource _model}" Command="{Binding Sort}" CommandParameter="Model"/>
+                        <RadioButton Content="{DynamicResource _price}" Command="{Binding Sort}" CommandParameter="Price"/>
                     </WrapPanel>
                 </StackPanel>
             </materialDesign:Card>
@@ -116,11 +118,11 @@
                     <Image Margin="10" Width="200" Height="300" Source="{Binding Path=SelectedPhone.Image, UpdateSourceTrigger=PropertyChanged}"></Image>
                 </StackPanel>
             </materialDesign:Card>
-            <Label Style="{StaticResource l1}" Grid.Row="1" Grid.Column="0">Производитель:</Label>
+            <Label Style="{StaticResource l1}" Grid.Row="1" Grid.Column="0" Content="{DynamicResource _manufact}"/>
             <TextBlock Style="{StaticResource tb}" Grid.Row="1" Grid.Column="1" Text="{Binding Path=SelectedPhone.Manufact}"></TextBlock>
-            <Label Style="{StaticResource l1}" Grid.Row="2" Grid.Column="0">Модель:</Label>
+            <Label Style="{StaticResource l1}" Grid.Row="2" Grid.Column="0" Content="{DynamicResource _model}"/>
             <TextBlock Style="{StaticResource tb}" Grid.Row="2" Grid.Column="1" Text="{Binding Path=SelectedPhone.Model}"></TextBlock>
-            <Label Style="{StaticResource l1}" Grid.Row="3" Grid.Column="0" >Цена:</Label>
+            <Label Style="{StaticResource l1}" Grid.Row="3" Grid.Column="0" Content="{DynamicResource _price}"/>
             <TextBlock Style="{StaticResource tb}" Grid.Row="3" Grid.Column="1" Text="{Binding Path=SelectedPhone.Price}"></TextBlock>
             <Button Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource butt1}" Width="40" Height="40" Command="{Binding Info}" HorizontalAlignment="Center">
                 <materialDesign:PackIcon Kind="InformationOutline" Width="30" Height="30"/>

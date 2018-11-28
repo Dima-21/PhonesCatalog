@@ -1,0 +1,20 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Catalog_Smartphone.ResourceDictionary.Languages"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+    <v:String x:Key="_manufact">Производитель</v:String>
+    <v:String x:Key="_model">Модель</v:String>
+    <v:String x:Key="_price">Цена</v:String>
+    <v:String x:Key="_os">Операционная система</v:String>
+    <v:String x:Key="_memory">Встроенная память (ГБ)</v:String>
+    <v:String x:Key="_ram">ОЗУ (ГБ)</v:String>
+    <v:String x:Key="_cam">Камера (МП)</v:String>
+    <v:String x:Key="_diagonal">Диагональ экрана</v:String>
+    <v:String x:Key="_battery">Емкость аккумулятора</v:String>
+    <v:String x:Key="_description">Описание</v:String>
+    <v:String x:Key="_changeImage">Изменить картинку</v:String>
+    <v:String x:Key="_sort">Сортировка</v:String>
+    <v:String x:Key="_language">Язык</v:String>
+    <v:String x:Key="_apply">Сохранить</v:String>
+    <v:String x:Key="_cancel">Отменить</v:String>
+</ResourceDictionary>
