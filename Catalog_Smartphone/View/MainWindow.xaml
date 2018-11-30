@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Catalog_Smartphone"
         mc:Ignorable="d"
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="PhonesCatalog" Height="500" Width="950" Name="mainwindow" WindowStartupLocation="CenterScreen"
+        Title="PhonesCatalog" Height="500" Width="950" Name="mainwindow" WindowStartupLocation="CenterScreen"  Icon="..\Images\Icons\mainicon.ico"
         MinHeight="650" MinWidth="700" WindowStyle="None" Style="{DynamicResource WindowStyle}" ResizeMode="NoResize">
     <Window.DataContext>
         <local:MainViewModel></local:MainViewModel>

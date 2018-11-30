@@ -46,8 +46,8 @@ namespace Catalog_Smartphone
             }
         }
 
-        private double price = 0;
-        public double Price
+        private double? price = 0;
+        public double? Price
         {
             get { return price; }
             set
@@ -68,8 +68,8 @@ namespace Catalog_Smartphone
             }
         }
 
-        private double screen = 0;
-        public double Screen
+        private double? screen = 0;
+        public double? Screen
         {
             get { return screen; }
             set
@@ -79,8 +79,8 @@ namespace Catalog_Smartphone
             }
         }
 
-        private int ram = 0;
-        public int Ram
+        private int? ram = 0;
+        public int? Ram
         {
             get { return ram; }
             set
@@ -90,8 +90,8 @@ namespace Catalog_Smartphone
             }
         }
 
-        private int memory = 0;
-        public int Memory
+        private int? memory = 0;
+        public int? Memory
         {
             get { return memory; }
             set
@@ -101,8 +101,8 @@ namespace Catalog_Smartphone
             }
         }
 
-        private int battery = 0;
-        public int Battery
+        private int? battery = 0;
+        public int? Battery
         {
             get { return battery; }
             set
@@ -122,8 +122,9 @@ namespace Catalog_Smartphone
                 Notify();
             }
         }
-        private int cam = 0;
-        public int Cam
+
+        private int? cam = 0;
+        public int? Cam
         {
             get { return cam; }
             set

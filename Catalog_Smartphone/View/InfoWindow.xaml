@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Catalog_Smartphone.ViewModel"
-        mc:Ignorable="d" WindowStartupLocation="CenterScreen" MinHeight="300" MinWidth="300"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" MinHeight="300" MinWidth="300"  Icon="..\Images\Icons\infoicon.ico"
         Title="Информация о телефоне" Height="450" Width="800" Style ="{DynamicResource WindowStyle}" >
     <Window.DataContext>
         <local:InfoViewModel></local:InfoViewModel>
@@ -21,7 +21,7 @@
         </Grid.ColumnDefinitions>
         <Image  Source="{Binding Phone.Image}" Width="100" HorizontalAlignment="Left" Margin="15"/>
         <TextBlock Style="{StaticResource tb2}" Grid.Column="1" DockPanel.Dock="Right" Margin="0 15" TextWrapping="Wrap"
-                 FontSize="14"  Text="{Binding Phone.Descript}"></TextBlock>
+                 FontSize="16"  Text="{Binding Phone.Descript}"></TextBlock>
         <WrapPanel Grid.Row="1" Grid.ColumnSpan="2">
             <StackPanel Style="{StaticResource sp}">
                 <Label Content="{DynamicResource _manufact}"></Label>

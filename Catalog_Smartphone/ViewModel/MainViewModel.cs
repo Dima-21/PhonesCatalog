@@ -25,8 +25,6 @@ namespace Catalog_Smartphone
     {
         public PhonesContext Db { get; set; }
 
-        public WindowsManager WM { get; set; }
-
         private ObservableCollection<Phone> phones;
         public ObservableCollection<Phone> Phones
         {
@@ -95,13 +93,6 @@ namespace Catalog_Smartphone
             }
         }
 
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void Notify([CallerMemberName]string s = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(s));
-        }
-
         private PackIconKind winState;
         public PackIconKind WinState
         {
@@ -113,12 +104,17 @@ namespace Catalog_Smartphone
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void Notify([CallerMemberName]string s = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(s));
+        }
+
         public MainViewModel()
         {
             Db = new PhonesContext();
             Db.Phones.Load();
             Phones = Db.Phones.Local;
-            WM = new WindowsManager();
             WinState = PackIconKind.WindowMaximize;
             ListStyles = new List<string>();
             ListStyles.Add("Dark");
@@ -166,12 +162,7 @@ namespace Catalog_Smartphone
             get
             {
                 return info ??
-                  (info = new RelayCommand(x =>
-                  {
-                      PhoneMediator.Phone = (SelectedPhone.Clone()) as Phone;
-                      WM.ShowInfo();
-                      PhoneMediator.Phone = null;
-                  }, y => SelectedPhone != null));
+                  (info = new RelayCommand(x => InfoPhone(), y => SelectedPhone != null));
             }
         }
         private RelayCommand close;
@@ -236,7 +227,8 @@ namespace Catalog_Smartphone
         }
         private void AddPhone()
         {
-            WM.AddWindow();
+            AddWindow addWindow = new AddWindow();
+            addWindow.ShowDialog();
             if (PhoneMediator.IsApply)
             {
                 Db.Phones.Add(PhoneMediator.Phone);
@@ -244,10 +236,19 @@ namespace Catalog_Smartphone
             }
 
         }
+        private void InfoPhone()
+        {
+            PhoneMediator.Phone = (SelectedPhone.Clone()) as Phone;
+            InfoWindow infoWindow = new InfoWindow();
+            infoWindow.ShowDialog();
+            PhoneMediator.Phone = null;
+
+        }
         private void UpdatePhone()
         {
             PhoneMediator.Phone = (SelectedPhone.Clone()) as Phone;
-            WM.EditWindow();
+            AddWindow addWindow = new AddWindow();
+            addWindow.ShowDialog();
             if (PhoneMediator.IsApply)
             {
                 Db.Update(PhoneMediator.Phone);

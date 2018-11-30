@@ -123,7 +123,6 @@
     <Compile Include="DAL\PhonesContext.cs" />
     <Compile Include="Infrastructure\PhoneMediator.cs" />
     <Compile Include="Infrastructure\RelayCommand.cs" />
-    <Compile Include="Infrastructure\WindowsManager.cs" />
     <Compile Include="ViewModel\AddViewModel.cs" />
     <Compile Include="ViewModel\InfoViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -173,6 +172,9 @@
     <Content Include="DBPhones.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\Icons\editicon.ico" />
+    <Resource Include="Images\Icons\infoicon.ico" />
+    <Resource Include="Images\Icons\mainicon.ico" />
     <Resource Include="Images\Phones\iPhoneXsMax.jpg" />
     <Resource Include="Images\Phones\MeizuM6s.jpg" />
     <Resource Include="Images\Phones\SamsungS9.jpg" />
